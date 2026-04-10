@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Cyber Security Board | Result 2026</title>
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #3a7bd5;
+            --bg: #0f172a;
+            --text: #f8fafc;
+        }
+
+        body { 
+            font-family: 'Inter', -apple-system, sans-serif; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
+            color: var(--text);
+            margin: 0; 
+            display: flex; 
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 22px;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-title {
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        label { display: block; margin-bottom: 8px; font-size: 13px; color: #cbd5e1; font-weight: 600; }
+        
+        input { 
+            width: 100%; 
+            padding: 14px; 
+            margin-bottom: 20px; 
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 12px; 
+            color: white; 
+            box-sizing: border-box; 
+            font-size: 16px; 
+        }
+
+        /* Captcha Styling */
+        .captcha-area { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        #captchaBox { 
+            background: rgba(255, 255, 255, 0.1); 
+            padding: 10px 20px; 
+            border-radius: 8px; 
+            font-family: 'Courier New', monospace; 
+            font-size: 24px; 
+            font-weight: bold; 
+            color: var(--primary); 
+            letter-spacing: 4px; 
+            font-style: italic; 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            user-select: none;
+        }
+        .refresh-btn { color: var(--primary); cursor: pointer; font-size: 20px; }
+
+        .btn-submit { 
+            width: 100%; 
+            padding: 16px; 
+            background: linear-gradient(to right, var(--primary), var(--secondary)); 
+            color: white; 
+            border: none; 
+            border-radius: 12px; 
+            font-size: 16px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: 0.3s;
+        }
+
+        /* Result Section */
+        #marksheet { 
+            display: none; 
+            margin-top: 30px; 
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .student-info { margin-bottom: 20px; font-size: 14px; line-height: 1.6; }
+        .info-label { color: #94a3b8; font-size: 11px; text-transform: uppercase; }
+
+        .result-table { width: 100%; border-spacing: 0; margin-bottom: 20px; }
+        .result-table td { padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); font-size: 14px; }
+        .sub-name { color: #cbd5e1; }
+        .sub-marks { text-align: right; font-weight: bold; color: var(--primary); }
+
+        .final-badge {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+        }
+        .percentage { font-size: 30px; font-weight: 800; color: #22c55e; margin: 5px 0; }
+        .status-tag { color: #22c55e; font-weight: bold; font-size: 14px; text-transform: uppercase; }
+    </style>
+</head>
+<body onload="generateCaptcha()">
+
+<div class="navbar">
+    <h1>GLOBAL CYBER SECURITY</h1>
+</div>
+
+<div class="container">
+    <div class="glass-card">
+        <div class="form-title">Academic Result Portal 2026</div>
+        
+        <label>Enrollment / Seat Number</label>
+        <input type="text" id="seatInput" placeholder="Enter Number">
+        
+        <div class="captcha-area">
+            <div id="captchaBox"></div>
+            <div class="refresh-btn" onclick="generateCaptcha()">🔄</div>
+        </div>
+
+        <input type="text" id="capInput" placeholder="Enter Captcha">
+        
+        <button class="btn-submit" onclick="showResult()">VIEW RESULT</button>
+
+        <div id="marksheet">
+            <div class="student-info">
+                <span class="info-label">Candidate Name</span><br>
+                <b id="resName" style="font-size: 16px;"></b><br><br>
+                <span class="info-label">Seat Number</span><br>
+                <b id="resSeat"></b>
+            </div>
+
+            <table class="result-table">
+                <tr><td class="sub-name">Information Gathering</td><td class="sub-marks">68/100</td></tr>
+                <tr><td class="sub-name">Scanning & Enumeration</td><td class="sub-marks">54/100</td></tr>
+                <tr><td class="sub-name">Sniffing & Evading Security</td><td class="sub-marks">87/100</td></tr>
+                <tr><td class="sub-name">Cryptography</td><td class="sub-marks">43/100</td></tr>
+                <tr><td class="sub-name">Cloud & Mobile Security</td><td class="sub-marks">68/100</td></tr>
+            </table>
+
+            <div class="final-badge">
+                <div class="info-label" style="color: #22c55e;">Overall Percentage</div>
+                <div class="percentage">64.00%</div>
+                <div class="status-tag">Status: Qualified (AIR 164)</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let code = "";
+    function generateCaptcha() {
+        const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        code = "";
+        for (let i = 0; i < 6; i++) {
+            code += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        document.getElementById('captchaBox').innerText = code;
+        document.getElementById('capInput').value = "";
+    }
+
+    function showResult() {
+        const sNo = document.getElementById('seatInput').value.toUpperCase().trim();
+        const cIn = document.getElementById('capInput').value.trim();
+        const sheet = document.getElementById('marksheet');
+
+        if (sNo === "AN385402M" && cIn === code) {
+            sheet.style.display = "block";
+            document.getElementById('resName').innerText = "PATIL YOGESH BHAGWAN PATIL";
+            document.getElementById('resSeat').innerText = sNo;
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        } else {
+            alert("Invalid Credentials! Please check Seat No and Captcha.");
+            generateCaptcha();
+        }
+    }
+</script>
+
+</body>
+</html>
